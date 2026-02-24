@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app
+  namespace: todo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+        - name: app
+          image: todo-app:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: app-secret
+                  key: db-url
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /api/todos
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /api/todos
+              port: 8080
+            initialDelaySeconds: 3
+            periodSeconds: 5

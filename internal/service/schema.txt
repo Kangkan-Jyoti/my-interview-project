@@ -1,0 +1,18 @@
+
+
+
+Entity - 
+
+users - user_id(PK) (UUID), email(varchar), created_at(timestamp)
+products - pid(UUID), nane(varchar), description(varchar),price(numbert), createdAt 
+Inventory - product_id(refrence pid (FK)), total_stock(number), created_at()
+Carts - cart_id(UUID(PK)), user_id(refrence FK user_id), created_at(timestamp), status()
+Orders - order_id(UUID), user_id(referece FK user_id), cart_id(refrerence FK cart_id), number_of_item(numner), status (varchar), created_at()
+carts_product - id(UUID), cart_id(reference cart_id), product_id(), quantity(number), price(number), created_at.
+checkout_order - id (UUID), cart_id(refrence FK cart_id), user_id(refrence FK user_id), order_id(refrence FK order_id), created_at(timestamp), status(va
+rchar), transaction_id(varchar), total_price(number)
+
+payment_transaction - id(UUID), order_id(refrence FK order_id), transaction_id(varchar), amount(number), status(varchar), created_at(timestamp)
+
+
+
